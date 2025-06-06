@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store Mapping App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app-container" class="container hidden">
+        <div id="toast" class="toast hidden"></div>
+
+        <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-xl);">
+            <h1>Store Mapping Dashboard</h1>
+            <button id="logout-btn" class="btn btn-outline">Logout</button>
+        </header>
+
+        <div id="form-section" class="card animate-slideIn" style="margin-bottom: var(--spacing-xl);">
+             <h2 class="mb-lg">Mapping Request Form</h2>
+            <form id="mapping-form">
+                <input type="hidden" id="mapping-id">
+                <div class="grid-cols-1-md-2">
+                    <div>
+                        <label for="store-name">Store Name</label>
+                        <select id="store-name" name="store_name" class="form-control" required>
+                            <option value="">Select Store</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="brand">Brand</label>
+                        <select id="brand" name="brand" class="form-control" required>
+                            <option value="">Select Brand</option>
+                            <optgroup label="Mobile Brands">
+                                <option value="Apple">Apple (MOB)</option><option value="Samsung">Samsung (MOB)</option><option value="Vivo">Vivo (MOB)</option><option value="Oppo">Oppo (MOB)</option><option value="Xiaomi">Xiaomi (MOB)</option><option value="Motorola">Motorola (MOB)</option><option value="Realme">Realme (MOB)</option><option value="Tecno">Tecno (MOB)</option><option value="Google">Google (MOB)</option><option value="OnePlus">OnePlus (MOB)</option>
+                            </optgroup>
+                            <optgroup label="Home Appliances">
+                                <option value="LG">LG (HA)</option><option value="Samsung">Samsung (HA)</option><option value="Haier">Haier (HA)</option><option value="Bluestar">Bluestar (HA)</option><option value="Whirlpool">Whirlpool (HA)</option><option value="Hitachi">Hitachi (HA)</option><option value="Mitsubishi">Mitsubishi (HA)</option><option value="Daikin">Daikin (HA)</option><option value="BPL">BPL (HA)</option><option value="Carrier">Carrier (HA)</option><option value="IFB">IFB (HA)</option><option value="OGeneral">OGeneral (HA)</option><option value="Voltas">Voltas (HA)</option><option value="Sony">Sony (HA)</option><option value="Impex">Impex (HA)</option><option value="Bosch">Bosch (HA)</option>
+                            </optgroup>
+                            <optgroup label="Laptops">
+                                <option value="Lenovo">Lenovo (IT)</option><option value="Dell">Dell (IT)</option><option value="Acer">Acer (IT)</option><option value="Asus">Asus (IT)</option><option value="HP">HP (IT)</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div id="apple-code-section" class="hidden">
+                        <label for="apple-code">Apple Code</label>
+                        <input id="apple-code" name="apple_code" type="text" class="form-control">
+                    </div>
+
+                    <div class="col-span-full">
+                        <div class="tab-container">
+                           <button type="button" id="financier-tab" class="tab active">Financiers</button>
+                           <button type="button" id="pinelabs-tab" class="tab">Pine Labs</button>
+                        </div>
+                        <input type="hidden" id="active-tab" name="active_tab" value="financier">
+
+                        <div id="financiers-section" class="grid-cols-1-md-2">
+                            <div>
+                                <label for="financier">Financier</label>
+                                <select id="financier" name="financier" class="form-control" required>
+                                    <option value="">Select Financier</option>
+                                    <option value="Bajaj">Bajaj</option><option value="IDFC">IDFC</option><option value="HDFC">HDFC</option><option value="HDB">HDB</option><option value="TVS">TVS</option><option value="Benow">Benow</option><option value="ICICI">ICICI</option><option value="Home Credit">Home Credit</option><option value="Kotak">Kotak</option>
+                                </select>
+                            </div>
+                            <div id="bajaj-code-section" class="hidden"><label for="bajaj-code">Bajaj Code</label><input id="bajaj-code" name="bajaj_code" type="text" class="form-control"></div>
+                            <div id="idfc-code-section" class="hidden"><label for="idfc-code">IDFC Code</label><input id="idfc-code" name="idfc_code" type="text" class="form-control"></div>
+                            <div id="hdfc-code-section" class="hidden"><label for="hdfc-code">HDFC Code</label><input id="hdfc-code" name="hdfc_code" type="text" class="form-control"></div>
+                            <div id="hdb-code-section" class="hidden"><label for="hdb-code">HDB Code</label><input id="hdb-code" name="hdb_code" type="text" class="form-control"></div>
+                            <div id="tvs-code-section" class="hidden"><label for="tvs-code">TVS Code</label><input id="tvs-code" name="tvs_code" type="text" class="form-control"></div>
+                            <div id="benow-code-section" class="hidden"><label for="benow-code">Benow Code</label><input id="benow-code" name="benow_code" type="text" class="form-control"></div>
+                            <div id="icici-code-section" class="hidden"><label for="icici-code">ICICI Code</label><input id="icici-code" name="icici_code" type="text" class="form-control"></div>
+                            <div id="home-credit-code-section" class="hidden"><label for="home-credit-code">Home Credit Code</label><input id="home-credit-code" name="home_credit_code" type="text" class="form-control"></div>
+                            <div id="kotak-code-section" class="hidden"><label for="kotak-code">Kotak Code</label><input id="kotak-code" name="kotak_code" type="text" class="form-control"></div>
+                        </div>
+
+                        <div id="pinelabs-section" class="hidden space-y-md">
+                            <label>Pine Labs Details</label>
+                            <div id="pinelabs-entries" class="space-y-md">
+                                <div class="pinelabs-entry grid-cols-1-md-4">
+                                    <div><label class="hidden md:block">POS ID</label><input type="text" name="pos_id" placeholder="POS ID" class="form-control pinelabs-pos-id"></div>
+                                    <div><label class="hidden md:block">TID</label><input type="text" name="tid" placeholder="TID" class="form-control pinelabs-tid"></div>
+                                    <div><label class="hidden md:block">Serial No</label><input type="text" name="serial_no" placeholder="Serial No" class="form-control pinelabs-serial-no"></div>
+                                    <div><label class="hidden md:block">Store ID</label><input type="text" name="store_id" placeholder="Store ID" class="form-control pinelabs-store-id"></div>
+                                </div>
+                            </div>
+                            <button type="button" id="add-pinelabs" class="btn btn-outline" style="font-size: 0.9rem; padding: 0.6rem 1rem;">Add Pine Labs Entry</button>
+                        </div>
+                    </div>
+                    
+                    <div><label for="state">State</label><select id="state" name="state" class="form-control" required><option value="">Select State</option><option value="Tamil Nadu">Tamil Nadu</option><option value="Kerala">Kerala</option><option value="Pondicherry">Pondicherry</option></select></div>
+                    <div><label for="asm-name">ASM Name</label><input id="asm-name" name="asm_name" type="text" class="form-control" required></div>
+                    <div><label for="mail-id">Mail ID</label><input id="mail-id" name="mail_id" type="email" class="form-control" required></div>
+                    <div><label for="requested-by">Requested By</label><input id="requested-by" name="requested_by" type="text" class="form-control" required></div>
+                </div>
+                <div style="display: flex; gap: var(--spacing-md); margin-top: var(--spacing-xl);">
+                    <button type="submit" id="submit-btn" class="btn btn-primary">
+                        <span id="submit-text">Submit Mapping Request</span>
+                        <span id="submit-loading" class="hidden loading-spinner ml-sm"></span>
+                    </button>
+                    <button type="button" id="cancel-edit-btn" class="btn btn-outline hidden">Cancel Edit</button>
+                </div>
+            </form>
+        </div>
+
+        <div id="table-section" class="card animate-slideIn" style="animation-delay: 100ms;">
+            <header style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--spacing-md);">
+                <h2 style="margin-bottom: 0;">Your Mapping Requests</h2>
+                <button id="download-excel" class="btn btn-secondary">Download as Excel</button>
+            </header>
+
+            <div class="table-container mb-xl">
+                <h3 style="padding: var(--spacing-md) var(--spacing-lg); font-size: 1.1rem; border-bottom: 1px solid var(--border-light);">Main Mappings</h3>
+                <table id="mapping-table">
+                    <thead>
+                        <tr>
+                            <th>ID</th><th>Store Name</th><th>ASM</th><th>Mail ID</th><th>Brand</th><th>Brand Code</th><th>Financier</th><th>Financier Code</th><th>Requested Date</th><th>Requested By</th><th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="mapping-table-body"></tbody>
+                </table>
+            </div>
+
+            <div class="table-container">
+                <h3 style="padding: var(--spacing-md) var(--spacing-lg); font-size: 1.1rem; border-bottom: 1px solid var(--border-light);">Pine Labs Details</h3>
+                <table id="pinelabs-table">
+                    <thead>
+                        <tr>
+                            <th>Mapping ID</th>
+                            <th>POS ID</th>
+                            <th>TID</th>
+                            <th>Serial No</th>
+                            <th>Store ID</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pinelabs-table-body">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+    <script>
+        const supabaseClient = supabase.createClient(
+            'https://ecjkxnlejaiupmlyitgu.supabase.co',
+            'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImVjamt4bmxlamFpdXBtbHlpdGd1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDc4OTIzMjAsImV4cCI6MjA2MzQ2ODMyMH0.Edchr54scHNwpy_34zNc_0MJpYArzV7-cbF87TBGwnM'
+        );
+
+        window.showToast = function(message, type) {
+            const toast = document.getElementById('toast');
+            if (toast) {
+                toast.textContent = message;
+                toast.className = 'toast show';
+                toast.classList.add(type);
+                setTimeout(() => { toast.className = 'toast hidden'; }, 3000);
+            } else {
+                console.warn("Toast element not found. Message:", message, "Type:", type);
+            }
+        };
+    </script>
+    <script src="index.js"></script>
+    <script src="pinelabs.js"></script>
+</body>
+</html>
